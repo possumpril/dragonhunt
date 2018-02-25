@@ -1,0 +1,149 @@
+html > body > div
+{
+    height:650px;
+    width:500px;
+    padding-top: 10px;
+}
+
+html > body > div > .button
+{
+    width: 90px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button
+{
+    width: 90px;
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+html > body > .menu
+{
+    display: block;
+    background-color: #ff0000; 
+}
+
+html > body > .game
+{
+    display: none;
+    background-color: #00ff00;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+html > body > .game > .field
+{
+    width: 500px;
+    height: 500px;
+    margin-bottom: 50px;
+}
+
+html > body > .game > div > .playingArea > .playingCell, .dragonCell, .holeCell, .simpleCell, .dragonWarningCell,
+.holeWarningCell, .doubleWarningCell
+{
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    background-size: cover;
+}
+
+html > body > .settings
+{
+    display: none;
+    background-color: #0000ff;
+}
+
+html > body > button
+{
+    background-color: #ffffff;
+}
+
+html > body > .game > div > .playingArea, .caps, .playerField
+{
+    display: grid;
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    grid-template: repeat(10,10%)/repeat(10,10%);
+}
+
+html > body > .game > .field > .playingArea
+{
+    z-index: 0;
+}
+
+html > body > .game > .field > .caps
+{
+    z-index: 50;
+}
+
+html > body > .game > .field > .playerField
+{
+    z-index: 25;
+}
+
+html > body > .game > div > .caps > .unvisited_cap
+{
+    width: 50px;
+    height: 50px;
+    background-color: #000000;
+}
+
+html > body > .game > div > .caps > .visited_cap
+{
+    width: 50px;
+    height: 50px;
+    background-color: #00000000;
+}
+
+html > body > .game > div > .playingArea > .dragonCell
+{
+    background-image: url(./images/dragon.jpg);
+}
+
+html > body > .game > div > .playingArea > .holeCell
+{
+    background-image: url(./images/hole.jpg);
+}
+
+html > body > .game > div > .playingArea > .simpleCell
+{
+    background-image: url(./images/simple.jpg);
+}
+
+html > body > .game > div > .playingArea > .dragonWarningCell
+{
+    background-image: url(./images/dragonWarning.jpg);
+}
+
+html > body > .game > div > .playingArea > .holeWarningCell
+{
+    background-image: url(./images/holeWarning.jpg);
+}
+
+html > body > .game > div > .playingArea > .doubleWarningCell
+{
+    background-image: url(./images/doubleWarning.jpg);
+}
+
+html > body > .game > .field > .playerField > .walking
+{
+    background-image: url(./images/player.png);
+}
+
+html > body > .game > .field > .playerField > .shooting
+{
+    background-image: url(./images/spear.png);
+    transform-origin: 50% 50%;
+    transform: rotate(0deg);
+}
+
+#player
+{
+    height: 50px;
+    width: 50px;
+    grid-area: 10/1;
+    background-size: cover;
+}

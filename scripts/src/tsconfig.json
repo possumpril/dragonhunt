@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"module": "esnext",
+		"target": "es2017",
+		
+		"strict": true,
+		
+		"noUnusedLocals": false,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"allowSyntheticDefaultImports": true,
+		
+		"removeComments": true,
+		"sourceMap": true
+	}
+}

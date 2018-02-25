@@ -1,0 +1,21 @@
+{
+  "name": "dragonhunt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-loader": "^3.3.1",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.3.0",
+    "jquery": "^3.3.1"
+  }
+}

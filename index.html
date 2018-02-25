@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+	    <title>Dragon Hunt</title>
+        <link rel="stylesheet" type="text/css" href="styles/index.css"/>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    </head>
+    
+    <body>
+        <header>
+		    <h1>Dragon Hunt</h1>
+		    <h2>Игра про охоту на дракона</h2>
+	    </header>
+
+        <div id="menu" class="menu">
+            <div class="button"><button id="gameButton" type="button">Игра</button></div>
+            <div class="button"><button id="settingsButton" type="button">Настройки</button></div>
+        </div>
+        <div id="game" class="game">
+            <div class="field">
+                <div class="playingArea" id="playingArea">
+                    <div class="playingCell" id="0"></div>
+                    <div class="playingCell" id="1"></div>
+                    <div class="playingCell" id="2"></div>
+                    <div class="playingCell" id="3"></div>
+                    <div class="playingCell" id="4"></div>
+                    <div class="playingCell" id="5"></div>
+                    <div class="playingCell" id="6"></div>
+                    <div class="playingCell" id="7"></div>
+                    <div class="playingCell" id="8"></div>
+                    <div class="playingCell" id="9"></div>
+                    <div class="playingCell" id="10"></div>
+                    <div class="playingCell" id="11"></div>
+                    <div class="playingCell" id="12"></div>
+                    <div class="playingCell" id="13"></div>
+                    <div class="playingCell" id="14"></div>
+                    <div class="playingCell" id="15"></div>
+                    <div class="playingCell" id="16"></div>
+                    <div class="playingCell" id="17"></div>
+                    <div class="playingCell" id="18"></div>
+                    <div class="playingCell" id="19"></div>
+                    <div class="playingCell" id="20"></div>
+                    <div class="playingCell" id="21"></div>
+                    <div class="playingCell" id="22"></div>
+                    <div class="playingCell" id="23"></div>
+                    <div class="playingCell" id="24"></div>
+                    <div class="playingCell" id="25"></div>
+                    <div class="playingCell" id="26"></div>
+                    <div class="playingCell" id="27"></div>
+                    <div class="playingCell" id="28"></div>
+                    <div class="playingCell" id="29"></div>
+                    <div class="playingCell" id="30"></div>
+                    <div class="playingCell" id="31"></div>
+                    <div class="playingCell" id="32"></div>
+                    <div class="playingCell" id="33"></div>
+                    <div class="playingCell" id="34"></div>
+                    <div class="playingCell" id="35"></div>
+                    <div class="playingCell" id="36"></div>
+                    <div class="playingCell" id="37"></div>
+                    <div class="playingCell" id="38"></div>
+                    <div class="playingCell" id="39"></div>
+                    <div class="playingCell" id="40"></div>
+                    <div class="playingCell" id="41"></div>
+                    <div class="playingCell" id="42"></div>
+                    <div class="playingCell" id="43"></div>
+                    <div class="playingCell" id="44"></div>
+                    <div class="playingCell" id="45"></div>
+                    <div class="playingCell" id="46"></div>
+                    <div class="playingCell" id="47"></div>
+                    <div class="playingCell" id="48"></div>
+                    <div class="playingCell" id="49"></div>
+                    <div class="playingCell" id="50"></div>
+                    <div class="playingCell" id="51"></div>
+                    <div class="playingCell" id="52"></div>
+                    <div class="playingCell" id="53"></div>
+                    <div class="playingCell" id="54"></div>
+                    <div class="playingCell" id="55"></div>
+                    <div class="playingCell" id="56"></div>
+                    <div class="playingCell" id="57"></div>
+                    <div class="playingCell" id="58"></div>
+                    <div class="playingCell" id="59"></div>
+                    <div class="playingCell" id="60"></div>
+                    <div class="playingCell" id="61"></div>
+                    <div class="playingCell" id="62"></div>
+                    <div class="playingCell" id="63"></div>
+                    <div class="playingCell" id="64"></div>
+                    <div class="playingCell" id="65"></div>
+                    <div class="playingCell" id="66"></div>
+                    <div class="playingCell" id="67"></div>
+                    <div class="playingCell" id="68"></div>
+                    <div class="playingCell" id="69"></div>
+                    <div class="playingCell" id="70"></div>
+                    <div class="playingCell" id="71"></div>
+                    <div class="playingCell" id="72"></div>
+                    <div class="playingCell" id="73"></div>
+                    <div class="playingCell" id="74"></div>
+                    <div class="playingCell" id="75"></div>
+                    <div class="playingCell" id="76"></div>
+                    <div class="playingCell" id="77"></div>
+                    <div class="playingCell" id="78"></div>
+                    <div class="playingCell" id="79"></div>
+                    <div class="playingCell" id="80"></div>
+                    <div class="playingCell" id="81"></div>
+                    <div class="playingCell" id="82"></div>
+                    <div class="playingCell" id="83"></div>
+                    <div class="playingCell" id="84"></div>
+                    <div class="playingCell" id="85"></div>
+                    <div class="playingCell" id="86"></div>
+                    <div class="playingCell" id="87"></div>
+                    <div class="playingCell" id="88"></div>
+                    <div class="playingCell" id="89"></div>
+                    <div class="playingCell" id="90"></div>
+                    <div class="playingCell" id="91"></div>
+                    <div class="playingCell" id="92"></div>
+                    <div class="playingCell" id="93"></div>
+                    <div class="playingCell" id="94"></div>
+                    <div class="playingCell" id="95"></div>
+                    <div class="playingCell" id="96"></div>
+                    <div class="playingCell" id="97"></div>
+                    <div class="playingCell" id="98"></div>
+                    <div class="playingCell" id="99"></div>
+                </div>
+                <div class="playerField">
+                    <div id="player" class="walking"></div>
+                </div>
+                <div id="caps" class="caps">
+                    <div class = "unvisited_cap" id="c0"></div>
+                    <div class = "unvisited_cap" id="c1"></div>
+                    <div class = "unvisited_cap" id="c2"></div>
+                    <div class = "unvisited_cap" id="c3"></div>
+                    <div class = "unvisited_cap" id="c4"></div>
+                    <div class = "unvisited_cap" id="c5"></div>
+                    <div class = "unvisited_cap" id="c6"></div>
+                    <div class = "unvisited_cap" id="c7"></div>
+                    <div class = "unvisited_cap" id="c8"></div>
+                    <div class = "unvisited_cap" id="c9"></div>
+                    <div class = "unvisited_cap" id="c10"></div>
+                    <div class = "unvisited_cap" id="c11"></div>
+                    <div class = "unvisited_cap" id="c12"></div>
+                    <div class = "unvisited_cap" id="c13"></div>
+                    <div class = "unvisited_cap" id="c14"></div>
+                    <div class = "unvisited_cap" id="c15"></div>
+                    <div class = "unvisited_cap" id="c16"></div>
+                    <div class = "unvisited_cap" id="c17"></div>
+                    <div class = "unvisited_cap" id="c18"></div>
+                    <div class = "unvisited_cap" id="c19"></div>
+                    <div class = "unvisited_cap" id="c20"></div>
+                    <div class = "unvisited_cap" id="c21"></div>
+                    <div class = "unvisited_cap" id="c22"></div>
+                    <div class = "unvisited_cap" id="c23"></div>
+                    <div class = "unvisited_cap" id="c24"></div>
+                    <div class = "unvisited_cap" id="c25"></div>
+                    <div class = "unvisited_cap" id="c26"></div>
+                    <div class = "unvisited_cap" id="c27"></div>
+                    <div class = "unvisited_cap" id="c28"></div>
+                    <div class = "unvisited_cap" id="c29"></div>
+                    <div class = "unvisited_cap" id="c30"></div>
+                    <div class = "unvisited_cap" id="c31"></div>
+                    <div class = "unvisited_cap" id="c32"></div>
+                    <div class = "unvisited_cap" id="c33"></div>
+                    <div class = "unvisited_cap" id="c34"></div>
+                    <div class = "unvisited_cap" id="c35"></div>
+                    <div class = "unvisited_cap" id="c36"></div>
+                    <div class = "unvisited_cap" id="c37"></div>
+                    <div class = "unvisited_cap" id="c38"></div>
+                    <div class = "unvisited_cap" id="c39"></div>
+                    <div class = "unvisited_cap" id="c40"></div>
+                    <div class = "unvisited_cap" id="c41"></div>
+                    <div class = "unvisited_cap" id="c42"></div>
+                    <div class = "unvisited_cap" id="c43"></div>
+                    <div class = "unvisited_cap" id="c44"></div>
+                    <div class = "unvisited_cap" id="c45"></div>
+                    <div class = "unvisited_cap" id="c46"></div>
+                    <div class = "unvisited_cap" id="c47"></div>
+                    <div class = "unvisited_cap" id="c48"></div>
+                    <div class = "unvisited_cap" id="c49"></div>
+                    <div class = "unvisited_cap" id="c50"></div>
+                    <div class = "unvisited_cap" id="c51"></div>
+                    <div class = "unvisited_cap" id="c52"></div>
+                    <div class = "unvisited_cap" id="c53"></div>
+                    <div class = "unvisited_cap" id="c54"></div>
+                    <div class = "unvisited_cap" id="c55"></div>
+                    <div class = "unvisited_cap" id="c56"></div>
+                    <div class = "unvisited_cap" id="c57"></div>
+                    <div class = "unvisited_cap" id="c58"></div>
+                    <div class = "unvisited_cap" id="c59"></div>
+                    <div class = "unvisited_cap" id="c60"></div>
+                    <div class = "unvisited_cap" id="c61"></div>
+                    <div class = "unvisited_cap" id="c62"></div>
+                    <div class = "unvisited_cap" id="c63"></div>
+                    <div class = "unvisited_cap" id="c64"></div>
+                    <div class = "unvisited_cap" id="c65"></div>
+                    <div class = "unvisited_cap" id="c66"></div>
+                    <div class = "unvisited_cap" id="c67"></div>
+                    <div class = "unvisited_cap" id="c68"></div>
+                    <div class = "unvisited_cap" id="c69"></div>
+                    <div class = "unvisited_cap" id="c70"></div>
+                    <div class = "unvisited_cap" id="c71"></div>
+                    <div class = "unvisited_cap" id="c72"></div>
+                    <div class = "unvisited_cap" id="c73"></div>
+                    <div class = "unvisited_cap" id="c74"></div>
+                    <div class = "unvisited_cap" id="c75"></div>
+                    <div class = "unvisited_cap" id="c76"></div>
+                    <div class = "unvisited_cap" id="c77"></div>
+                    <div class = "unvisited_cap" id="c78"></div>
+                    <div class = "unvisited_cap" id="c79"></div>
+                    <div class = "unvisited_cap" id="c80"></div>
+                    <div class = "unvisited_cap" id="c81"></div>
+                    <div class = "unvisited_cap" id="c82"></div>
+                    <div class = "unvisited_cap" id="c83"></div>
+                    <div class = "unvisited_cap" id="c84"></div>
+                    <div class = "unvisited_cap" id="c85"></div>
+                    <div class = "unvisited_cap" id="c86"></div>
+                    <div class = "unvisited_cap" id="c87"></div>
+                    <div class = "unvisited_cap" id="c88"></div>
+                    <div class = "unvisited_cap" id="c89"></div>
+                    <div class = "unvisited_cap" id="c90"></div>
+                    <div class = "unvisited_cap" id="c91"></div>
+                    <div class = "unvisited_cap" id="c92"></div>
+                    <div class = "unvisited_cap" id="c93"></div>
+                    <div class = "unvisited_cap" id="c94"></div>
+                    <div class = "unvisited_cap" id="c95"></div>
+                    <div class = "unvisited_cap" id="c96"></div>
+                    <div class = "unvisited_cap" id="c97"></div>
+                    <div class = "unvisited_cap" id="c98"></div>
+                    <div class = "unvisited_cap" id="c99"></div>
+                </div>
+            </div>    
+            
+            <div class="button"><button id="exitButton" type="button">Меню</button></div>
+        </div>
+        <div id="settings" class="settings">
+            <input type="number" pattern="\d [1-9]" min="1" max="9" id="holesNumberInput"></input>
+            <input type="submit" class="button" id="confirmButton"></input>
+            <div class="button"><button id="cancelButton" type="button">Отмена</button></div>
+        </div>
+        <script src="scripts/build/main.js"></script>
+    </body>
+</html>
