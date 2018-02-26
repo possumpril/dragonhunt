@@ -8,26 +8,27 @@ import * as $ from 'jquery';
 /**Класс игрока */
 export class Player 
 {
-    public divLink: JQuery<HTMLElement>;
-    public location: number;
-    public playerState: playerState;
+    private divLink: JQuery<HTMLElement>;
+    private location: number;
+    public playerState: PlayerState;
     public game: Game;
-    public shootingDirection: direction;
+    private shootingDirection: Direction;
     public constructor()
     {
         this.game = new Game();
-        this.playerState = playerState.isWalking;
+        this.playerState = PlayerState.isWalking;
         this.divLink = $("#player");
         this.divLink.css('grid-area', '10/1');
         this.location = 90;
-        this.shootingDirection = direction.up;
+        this.shootingDirection = Direction.up;
     }
 
     public initGame()
     {
-        this.game.GameStart();
-        this.playerState = playerState.isWalking;
+        this.game.gameStart();
+        this.playerState = PlayerState.isWalking;
         this.divLink.attr('class', 'walking');
+        this.divLink.css('transform', 'rotate(0deg)');
         this.location = 90;
         this.divLink.css('grid-area', '10/1');
         this.unHidePlayer();
@@ -35,33 +36,34 @@ export class Player
 
     public changePlayerState ()
     {
-        if (this.playerState === playerState.isWalking)
+        if (this.playerState === PlayerState.isWalking)
         {
-            this.playerState = playerState.isShooting;
+            this.playerState = PlayerState.isShooting;
             this.divLink.attr('class', 'shooting');
         }
         else 
         {
-            this.playerState = playerState.isWalking;
+            this.playerState = PlayerState.isWalking;
             this.divLink.attr('class', 'walking');
+            this.divLink.css('transform', 'rotate(0deg)');
         }
     }
 
-    public changeShootingDirection(dir: direction)
+    public changeShootingDirection(dir: Direction)
     {
         this.shootingDirection = dir;
         switch (dir)
         {
-            case direction.up:
+            case Direction.up:
                 this.divLink.css('transform', 'rotate(0deg)');
                 break;
-            case direction.down:
+            case Direction.down:
                 this.divLink.css('transform', 'rotate(180deg)');
                 break;
-            case direction.left:
+            case Direction.left:
                 this.divLink.css('transform', 'rotate(-90deg)');
                 break;
-            case direction.right:
+            case Direction.right:
                 this.divLink.css('transform', 'rotate(90deg)');
                 break;
             default:
@@ -70,22 +72,22 @@ export class Player
         }
     }
 
-    public hidePlayer ()
+    private hidePlayer ()
     {
         this.divLink.css('display', 'none');
     }
 
-    public unHidePlayer()
+    private unHidePlayer()
     {
         this.divLink.css('display', 'block');
     }
 
-    public go(directionOfGoing: direction)
+    public go(directionOfGoing: Direction)
     {
         let neighborIndex = this.getNeighborIndex(directionOfGoing);
         this.hidePlayer();
         let isGameNotOver = this.game.tryToGoOrShoot(Action.walking, neighborIndex);
-        if (isGameNotOver == true)
+        if (isGameNotOver === true)
         {
             this.unHidePlayer();
             this.location = neighborIndex;
@@ -98,7 +100,7 @@ export class Player
         let neighborIndex = this.getNeighborIndex(this.shootingDirection);
         this.hidePlayer();
         let isGameNotOver = this.game.tryToGoOrShoot(Action.shooting, neighborIndex);
-        if (isGameNotOver == true)
+        if (isGameNotOver === true)
         {
             alert('Игра не закончилась, что-то пошло не так');
         }
@@ -110,17 +112,17 @@ export class Player
         this.divLink.css('grid-area', '' + (Math.floor(index/10)+1) + '/' + (index%10+1));
     }
 
-    private getNeighborIndex(directionOfGoing: direction)
+    private getNeighborIndex(directionOfGoing: Direction)
     {
         switch (directionOfGoing)
         {
-            case direction.left:
+            case Direction.left:
                 return(this.game.getLeftNeighbour(this.location));
-            case direction.right:
+            case Direction.right:
                 return(this.game.getRightNeighbour(this.location));
-            case direction.up:
+            case Direction.up:
                 return(this.game.getUpperNeighbour(this.location));
-            case direction.down:
+            case Direction.down:
                 return(this.game.getLowerNeighbour(this.location));
             default:
                 alert('Получено неверное направление!');
@@ -130,7 +132,7 @@ export class Player
 
 }
 
-export enum playerState {isWalking, isShooting}
-export enum direction {left, right, up, down}
+export enum PlayerState {isWalking, isShooting}
+export enum Direction {left, right, up, down}
 
 export{Game} from "./game";

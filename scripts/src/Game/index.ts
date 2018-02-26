@@ -2,7 +2,7 @@
 
 //import {Game,GameOver,Cell,Content} from "./game";
 
-import {Player, direction, playerState} from "./player";
+import {Player, Direction, PlayerState} from "./player";
 import * as $ from 'jquery';
 
 let player: Player;
@@ -63,7 +63,7 @@ function exitButtonClick()
 
 function exitGame()
 {
-    player.game.GameState = false;
+    player.game.gameState = false;
     showMenu();
 }
 
@@ -85,7 +85,7 @@ function confirmChanges()
         let num = parseInt(str);
         if (num>0 && num<=9)
         {
-            player.game.HolesNumber = num;
+            player.game.holesNumber = num;
             showMenu();
         }
         else
@@ -98,60 +98,60 @@ function confirmChanges()
 
 function presskey(event: KeyboardEvent)
 {
-    if (player.game.GameState === true)
+    if (player.game.gameState === true)
     {
         let key = event.keyCode;
         switch (key)
         {
             case 87:
-                if(player.playerState === playerState.isWalking)
+                if(player.playerState === PlayerState.isWalking)
                 {
-                    player.go(direction.up);
+                    player.go(Direction.up);
                     break;
                 }
                 else
                 {
-                    player.changeShootingDirection(direction.up);
+                    player.changeShootingDirection(Direction.up);
                     break;
                 }
             case 83:
-                if(player.playerState === playerState.isWalking)
+                if(player.playerState === PlayerState.isWalking)
                 {
-                    player.go(direction.down);
+                    player.go(Direction.down);
                     break;
                 }
                 else
                 {
-                    player.changeShootingDirection(direction.down);
+                    player.changeShootingDirection(Direction.down);
                     break;
                 }
             case 65:
-                if(player.playerState === playerState.isWalking)
+                if(player.playerState === PlayerState.isWalking)
                 {
-                    player.go(direction.left);
+                    player.go(Direction.left);
                     break;
                 }
                 else
                 {
-                    player.changeShootingDirection(direction.left);
+                    player.changeShootingDirection(Direction.left);
                     break;
                 }
             case 68:
-                if(player.playerState === playerState.isWalking)
+                if(player.playerState === PlayerState.isWalking)
                 {
-                    player.go(direction.right);
+                    player.go(Direction.right);
                     break;
                 }
                 else
                 {
-                    player.changeShootingDirection(direction.right);
+                    player.changeShootingDirection(Direction.right);
                     break;
                 }
             case 32:
                 player.changePlayerState();
                 break;
             case 13:
-                if (player.playerState === playerState.isShooting)
+                if (player.playerState === PlayerState.isShooting)
                 {
                     player.shoot();
                 }

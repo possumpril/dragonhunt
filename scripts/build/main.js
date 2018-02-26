@@ -79,68 +79,68 @@
 
 class Game {
     constructor() {
-        this.GameState = false;
-        this.SideLength = Game.SIDE_LENGTH;
-        this.GameOver = GameOver.isNotOver;
-        this.CellsArray = [];
+        this.gameState = false;
+        this._sideLength = Game.SIDE_LENGTH;
+        this._gameOver = GameOver.isNotOver;
+        this._cellsArray = [];
         let a;
-        for (let i = 0; i <= (this.SideLength * this.SideLength) - 1; i++) {
-            this.CellsArray[i] = new __WEBPACK_IMPORTED_MODULE_0__cell__["a" /* Cell */]();
+        for (let i = 0; i <= (this._sideLength * this._sideLength) - 1; i++) {
+            this._cellsArray[i] = new __WEBPACK_IMPORTED_MODULE_0__cell__["a" /* Cell */]();
             a = document.getElementById(i.toString());
             if (a != null) {
-                this.CellsArray[i].divLink = a;
+                this._cellsArray[i].divLink = a;
             }
         }
         this._holesNumber = Game.DEFAULT_HOLES_NUMBER;
     }
-    set HolesNumber(enteredNumber) {
+    set holesNumber(enteredNumber) {
         this._holesNumber = enteredNumber;
     }
-    Filling() {
-        let dragon = this.chooseDragonPlace();
+    _filling() {
+        let dragon = this._chooseDragonPlace();
         let dangerArray = [];
         dangerArray[0] = dragon;
-        dangerArray = dangerArray.concat(this.chooseHolesPlaces(dragon));
-        this.placeDangers(dangerArray);
-        this.placeWarnings(dangerArray);
-        this.drawContent();
+        dangerArray = dangerArray.concat(this._chooseHolesPlaces(dragon));
+        this._placeDangers(dangerArray);
+        this._placeWarnings(dangerArray);
+        this._drawContent();
     }
-    chooseDragonPlace() {
-        let dragon = this.SideLength * (this.SideLength - 1);
-        while (dragon == this.SideLength * (this.SideLength - 1)) {
-            dragon = this.getRandomInt(0, this.SideLength * this.SideLength);
+    _chooseDragonPlace() {
+        let dragon = this._sideLength * (this._sideLength - 1);
+        while (dragon === this._sideLength * (this._sideLength - 1)) {
+            dragon = this._getRandomInt(0, this._sideLength * this._sideLength);
         }
-        this.CellsArray[dragon].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragon;
+        this._cellsArray[dragon].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragon;
         return dragon;
     }
-    chooseHolesPlaces(dragon) {
+    _chooseHolesPlaces(dragon) {
         let holesArray = [];
         let holeCoordinate;
         for (let i = 0; i < this._holesNumber; i++) {
             holeCoordinate = dragon;
-            while (holeCoordinate == dragon || holeCoordinate == this.SideLength * (this.SideLength - 1)) {
-                holeCoordinate = this.getRandomInt(0, this.SideLength * this.SideLength);
+            while (holeCoordinate === dragon || holeCoordinate === this._sideLength * (this._sideLength - 1)) {
+                holeCoordinate = this._getRandomInt(0, this._sideLength * this._sideLength);
             }
             holesArray[i] = holeCoordinate;
         }
         return holesArray;
     }
-    getRandomInt(min, max) {
+    _getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
-    placeDangers(dangerArray) {
-        this.CellsArray[dangerArray[0]].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragon;
+    _placeDangers(dangerArray) {
+        this._cellsArray[dangerArray[0]].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragon;
         for (let i = 1; i <= this._holesNumber; i++) {
-            this.CellsArray[dangerArray[i]].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].hole;
+            this._cellsArray[dangerArray[i]].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].hole;
         }
     }
-    placeWarnings(dangerArray) {
-        this.placeWarningsAroundDragon(dangerArray[0]);
+    _placeWarnings(dangerArray) {
+        this._placeWarningsAroundDragon(dangerArray[0]);
         for (let i = 1; i <= this._holesNumber; i++) {
-            this.placeWarningsAroundHole(dangerArray[i]);
+            this._placeWarningsAroundHole(dangerArray[i]);
         }
     }
-    placeWarningsAroundDragon(dragonPlace) {
+    _placeWarningsAroundDragon(dragonPlace) {
         let left = this.getLeftNeighbour(dragonPlace);
         let right = this.getRightNeighbour(dragonPlace);
         let down = this.getLowerNeighbour(dragonPlace);
@@ -155,111 +155,111 @@ class Game {
         let down_right = this.getRightNeighbour(down);
         let warningsPlaces = [left, right, down, up, left_left, right_right, up_up, down_down, up_left, up_right, down_left, down_right];
         for (let i = 0; i < 12; i++) {
-            if (this.CellsArray[warningsPlaces[i]].content == __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].none)
-                this.CellsArray[warningsPlaces[i]].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragonWarning;
+            if (this._cellsArray[warningsPlaces[i]].content === __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].none)
+                this._cellsArray[warningsPlaces[i]].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragonWarning;
         }
     }
-    placeWarningsAroundHole(holePlace) {
+    _placeWarningsAroundHole(holePlace) {
         let left = this.getLeftNeighbour(holePlace);
         let right = this.getRightNeighbour(holePlace);
         let down = this.getLowerNeighbour(holePlace);
         let up = this.getUpperNeighbour(holePlace);
         let warningsPlaces = [left, right, down, up];
         for (let i = 0; i < 4; i++) {
-            if (this.CellsArray[warningsPlaces[i]].content == __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].none)
-                this.CellsArray[warningsPlaces[i]].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].holeWarning;
-            if (this.CellsArray[warningsPlaces[i]].content == __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragonWarning)
-                this.CellsArray[warningsPlaces[i]].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].doubleWarning;
+            if (this._cellsArray[warningsPlaces[i]].content === __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].none)
+                this._cellsArray[warningsPlaces[i]].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].holeWarning;
+            if (this._cellsArray[warningsPlaces[i]].content === __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragonWarning)
+                this._cellsArray[warningsPlaces[i]].content = __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].doubleWarning;
         }
     }
-    drawContent() {
-        for (let i = 0; i < this.SideLength * this.SideLength; i++) {
-            if (this.CellsArray[i].divLink != null)
-                switch (this.CellsArray[i].content) {
+    _drawContent() {
+        for (let i = 0; i < this._sideLength * this._sideLength; i++) {
+            if (this._cellsArray[i].divLink != null)
+                switch (this._cellsArray[i].content) {
                     case __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragon:
-                        this.CellsArray[i].divLink.className = "dragonCell";
+                        this._cellsArray[i].divLink.className = "dragonCell";
                         break;
                     case __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].hole:
-                        this.CellsArray[i].divLink.className = "holeCell";
+                        this._cellsArray[i].divLink.className = "holeCell";
                         break;
                     case __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragonWarning:
-                        this.CellsArray[i].divLink.className = "dragonWarningCell";
+                        this._cellsArray[i].divLink.className = "dragonWarningCell";
                         break;
                     case __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].holeWarning:
-                        this.CellsArray[i].divLink.className = "holeWarningCell";
+                        this._cellsArray[i].divLink.className = "holeWarningCell";
                         break;
                     case __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].doubleWarning:
-                        this.CellsArray[i].divLink.className = "doubleWarningCell";
+                        this._cellsArray[i].divLink.className = "doubleWarningCell";
                         break;
                     default:
-                        this.CellsArray[i].divLink.className = "simpleCell";
+                        this._cellsArray[i].divLink.className = "simpleCell";
                         break;
                 }
         }
     }
     getLowerNeighbour(i) {
-        return (i + this.SideLength) % (this.SideLength * this.SideLength);
+        return (i + this._sideLength) % (this._sideLength * this._sideLength);
     }
     getUpperNeighbour(i) {
-        return (i + this.SideLength * (this.SideLength - 1)) % (this.SideLength * this.SideLength);
+        return (i + this._sideLength * (this._sideLength - 1)) % (this._sideLength * this._sideLength);
     }
     getLeftNeighbour(i) {
-        return (Math.floor(i / this.SideLength)) * this.SideLength + (this.SideLength - 1) - (this.SideLength - i % this.SideLength) % this.SideLength;
+        return (Math.floor(i / this._sideLength)) * this._sideLength + (this._sideLength - 1) - (this._sideLength - i % this._sideLength) % this._sideLength;
     }
     getRightNeighbour(i) {
-        return (Math.floor(i / this.SideLength)) * this.SideLength + (i % this.SideLength + 1) % this.SideLength;
+        return (Math.floor(i / this._sideLength)) * this._sideLength + (i % this._sideLength + 1) % this._sideLength;
     }
-    GameStart() {
-        this.GameState = true;
-        this.GameOver = GameOver.isNotOver;
+    gameStart() {
+        this.gameState = true;
+        this._gameOver = GameOver.isNotOver;
         this.cleanField();
-        this.Filling();
+        this._filling();
     }
     cleanField() {
-        for (let i = 0; i < this.SideLength * this.SideLength; i++) {
-            this.CellsArray[i].cleanCell();
-            this.closeCap(i);
+        for (let i = 0; i < this._sideLength * this._sideLength; i++) {
+            this._cellsArray[i].cleanCell();
+            this._closeCap(i);
         }
-        this.openCap(90);
+        this._openCap(90);
     }
     tryToGoOrShoot(action, index) {
-        let indexContent = this.CellsArray[index].content;
+        let indexContent = this._cellsArray[index].content;
         if (action === Action.walking) {
             if (indexContent === __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragon || indexContent === __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].hole) {
-                this.GameState = false;
-                this.identifyGameOver(action, indexContent);
+                this.gameState = false;
+                this._identifyGameOver(action, indexContent);
                 return false;
             }
             else {
-                if (this.CellsArray[index].visited === false) {
-                    this.openCap(index);
-                    this.CellsArray[index].visited === true;
+                if (this._cellsArray[index].visited === false) {
+                    this._openCap(index);
+                    this._cellsArray[index].visited === true;
                 }
                 return true;
             }
         }
         else {
-            this.GameState = false;
-            this.identifyGameOver(action, indexContent);
+            this.gameState = false;
+            this._identifyGameOver(action, indexContent);
             return false;
         }
     }
-    identifyGameOver(action, content) {
+    _identifyGameOver(action, content) {
         if (action === Action.walking && content === __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragon)
-            this.GameOver = GameOver.burningByDragon;
+            this._gameOver = GameOver.burningByDragon;
         if (action === Action.walking && content === __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].hole)
-            this.GameOver = GameOver.fallIntoHole;
+            this._gameOver = GameOver.fallIntoHole;
         if (action === Action.shooting && content === __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragon)
-            this.GameOver = GameOver.killingDragon;
+            this._gameOver = GameOver.killingDragon;
         if (action === Action.shooting && content != __WEBPACK_IMPORTED_MODULE_0__cell__["b" /* Content */].dragon)
-            this.GameOver = GameOver.burningByDragon;
-        this.finishGame();
+            this._gameOver = GameOver.burningByDragon;
+        this._();
     }
-    finishGame() {
-        for (let i = 0; i <= (this.SideLength * this.SideLength) - 1; i++) {
-            this.openCap(i);
+    _() {
+        for (let i = 0; i <= (this._sideLength * this._sideLength) - 1; i++) {
+            this._openCap(i);
         }
-        switch (this.GameOver) {
+        switch (this._gameOver) {
             case GameOver.burningByDragon:
                 alert('Вас сжег дракон!');
                 break;
@@ -274,11 +274,11 @@ class Game {
                 break;
         }
     }
-    openCap(index) {
+    _openCap(index) {
         let cap = __WEBPACK_IMPORTED_MODULE_1_jquery__("#c" + index);
         cap.attr('class', 'visited_cap');
     }
-    closeCap(index) {
+    _closeCap(index) {
         let cap = __WEBPACK_IMPORTED_MODULE_1_jquery__("#c" + index);
         cap.attr('class', 'unvisited_cap');
     }
@@ -10774,7 +10774,7 @@ function exitButtonClick() {
         exitButton.addEventListener("click", exitGame);
 }
 function exitGame() {
-    player.game.GameState = false;
+    player.game.gameState = false;
     showMenu();
 }
 function confirmButtonClick() {
@@ -10789,7 +10789,7 @@ function confirmChanges() {
         let str = holesNumberInput.value;
         let num = parseInt(str);
         if (num > 0 && num <= 9) {
-            player.game.HolesNumber = num;
+            player.game.holesNumber = num;
             showMenu();
         }
         else {
@@ -10798,57 +10798,57 @@ function confirmChanges() {
     }
 }
 function presskey(event) {
-    if (player.game.GameState === true) {
+    if (player.game.gameState === true) {
         let key = event.keyCode;
         switch (key) {
             case 87:
-                if (player.playerState === __WEBPACK_IMPORTED_MODULE_0__player__["c" /* playerState */].isWalking) {
-                    player.go(__WEBPACK_IMPORTED_MODULE_0__player__["b" /* direction */].up);
+                if (player.playerState === __WEBPACK_IMPORTED_MODULE_0__player__["c" /* PlayerState */].isWalking) {
+                    player.go(__WEBPACK_IMPORTED_MODULE_0__player__["a" /* Direction */].up);
                     break;
                 }
                 else {
-                    player.changeShootingDirection(__WEBPACK_IMPORTED_MODULE_0__player__["b" /* direction */].up);
+                    player.changeShootingDirection(__WEBPACK_IMPORTED_MODULE_0__player__["a" /* Direction */].up);
                     break;
                 }
             case 83:
-                if (player.playerState === __WEBPACK_IMPORTED_MODULE_0__player__["c" /* playerState */].isWalking) {
-                    player.go(__WEBPACK_IMPORTED_MODULE_0__player__["b" /* direction */].down);
+                if (player.playerState === __WEBPACK_IMPORTED_MODULE_0__player__["c" /* PlayerState */].isWalking) {
+                    player.go(__WEBPACK_IMPORTED_MODULE_0__player__["a" /* Direction */].down);
                     break;
                 }
                 else {
-                    player.changeShootingDirection(__WEBPACK_IMPORTED_MODULE_0__player__["b" /* direction */].down);
+                    player.changeShootingDirection(__WEBPACK_IMPORTED_MODULE_0__player__["a" /* Direction */].down);
                     break;
                 }
             case 65:
-                if (player.playerState === __WEBPACK_IMPORTED_MODULE_0__player__["c" /* playerState */].isWalking) {
-                    player.go(__WEBPACK_IMPORTED_MODULE_0__player__["b" /* direction */].left);
+                if (player.playerState === __WEBPACK_IMPORTED_MODULE_0__player__["c" /* PlayerState */].isWalking) {
+                    player.go(__WEBPACK_IMPORTED_MODULE_0__player__["a" /* Direction */].left);
                     break;
                 }
                 else {
-                    player.changeShootingDirection(__WEBPACK_IMPORTED_MODULE_0__player__["b" /* direction */].left);
+                    player.changeShootingDirection(__WEBPACK_IMPORTED_MODULE_0__player__["a" /* Direction */].left);
                     break;
                 }
             case 68:
-                if (player.playerState === __WEBPACK_IMPORTED_MODULE_0__player__["c" /* playerState */].isWalking) {
-                    player.go(__WEBPACK_IMPORTED_MODULE_0__player__["b" /* direction */].right);
+                if (player.playerState === __WEBPACK_IMPORTED_MODULE_0__player__["c" /* PlayerState */].isWalking) {
+                    player.go(__WEBPACK_IMPORTED_MODULE_0__player__["a" /* Direction */].right);
                     break;
                 }
                 else {
-                    player.changeShootingDirection(__WEBPACK_IMPORTED_MODULE_0__player__["b" /* direction */].right);
+                    player.changeShootingDirection(__WEBPACK_IMPORTED_MODULE_0__player__["a" /* Direction */].right);
                     break;
                 }
             case 32:
                 player.changePlayerState();
                 break;
             case 13:
-                if (player.playerState === __WEBPACK_IMPORTED_MODULE_0__player__["c" /* playerState */].isShooting) {
+                if (player.playerState === __WEBPACK_IMPORTED_MODULE_0__player__["c" /* PlayerState */].isShooting) {
                     player.shoot();
                 }
         }
     }
 }
 function main() {
-    player = new __WEBPACK_IMPORTED_MODULE_0__player__["a" /* Player */]();
+    player = new __WEBPACK_IMPORTED_MODULE_0__player__["b" /* Player */]();
     gameStartButtonClick();
     settingsButtonClick();
     exitButtonClick();
@@ -10864,8 +10864,8 @@ function main() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return playerState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return direction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return PlayerState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Direction; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
@@ -10875,43 +10875,45 @@ function main() {
 class Player {
     constructor() {
         this.game = new __WEBPACK_IMPORTED_MODULE_0__game__["b" /* Game */]();
-        this.playerState = playerState.isWalking;
+        this.playerState = PlayerState.isWalking;
         this.divLink = __WEBPACK_IMPORTED_MODULE_1_jquery__("#player");
         this.divLink.css('grid-area', '10/1');
         this.location = 90;
-        this.shootingDirection = direction.up;
+        this.shootingDirection = Direction.up;
     }
     initGame() {
-        this.game.GameStart();
-        this.playerState = playerState.isWalking;
+        this.game.gameStart();
+        this.playerState = PlayerState.isWalking;
         this.divLink.attr('class', 'walking');
+        this.divLink.css('transform', 'rotate(0deg)');
         this.location = 90;
         this.divLink.css('grid-area', '10/1');
         this.unHidePlayer();
     }
     changePlayerState() {
-        if (this.playerState === playerState.isWalking) {
-            this.playerState = playerState.isShooting;
+        if (this.playerState === PlayerState.isWalking) {
+            this.playerState = PlayerState.isShooting;
             this.divLink.attr('class', 'shooting');
         }
         else {
-            this.playerState = playerState.isWalking;
+            this.playerState = PlayerState.isWalking;
             this.divLink.attr('class', 'walking');
+            this.divLink.css('transform', 'rotate(0deg)');
         }
     }
     changeShootingDirection(dir) {
         this.shootingDirection = dir;
         switch (dir) {
-            case direction.up:
+            case Direction.up:
                 this.divLink.css('transform', 'rotate(0deg)');
                 break;
-            case direction.down:
+            case Direction.down:
                 this.divLink.css('transform', 'rotate(180deg)');
                 break;
-            case direction.left:
+            case Direction.left:
                 this.divLink.css('transform', 'rotate(-90deg)');
                 break;
-            case direction.right:
+            case Direction.right:
                 this.divLink.css('transform', 'rotate(90deg)');
                 break;
             default:
@@ -10929,7 +10931,7 @@ class Player {
         let neighborIndex = this.getNeighborIndex(directionOfGoing);
         this.hidePlayer();
         let isGameNotOver = this.game.tryToGoOrShoot(__WEBPACK_IMPORTED_MODULE_0__game__["a" /* Action */].walking, neighborIndex);
-        if (isGameNotOver == true) {
+        if (isGameNotOver === true) {
             this.unHidePlayer();
             this.location = neighborIndex;
             this.movePlayer(neighborIndex);
@@ -10939,7 +10941,7 @@ class Player {
         let neighborIndex = this.getNeighborIndex(this.shootingDirection);
         this.hidePlayer();
         let isGameNotOver = this.game.tryToGoOrShoot(__WEBPACK_IMPORTED_MODULE_0__game__["a" /* Action */].shooting, neighborIndex);
-        if (isGameNotOver == true) {
+        if (isGameNotOver === true) {
             alert('Игра не закончилась, что-то пошло не так');
         }
     }
@@ -10949,13 +10951,13 @@ class Player {
     }
     getNeighborIndex(directionOfGoing) {
         switch (directionOfGoing) {
-            case direction.left:
+            case Direction.left:
                 return (this.game.getLeftNeighbour(this.location));
-            case direction.right:
+            case Direction.right:
                 return (this.game.getRightNeighbour(this.location));
-            case direction.up:
+            case Direction.up:
                 return (this.game.getUpperNeighbour(this.location));
-            case direction.down:
+            case Direction.down:
                 return (this.game.getLowerNeighbour(this.location));
             default:
                 alert('Получено неверное направление!');
@@ -10963,20 +10965,20 @@ class Player {
         }
     }
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = Player;
+/* harmony export (immutable) */ __webpack_exports__["b"] = Player;
 
-var playerState;
-(function (playerState) {
-    playerState[playerState["isWalking"] = 0] = "isWalking";
-    playerState[playerState["isShooting"] = 1] = "isShooting";
-})(playerState || (playerState = {}));
-var direction;
-(function (direction) {
-    direction[direction["left"] = 0] = "left";
-    direction[direction["right"] = 1] = "right";
-    direction[direction["up"] = 2] = "up";
-    direction[direction["down"] = 3] = "down";
-})(direction || (direction = {}));
+var PlayerState;
+(function (PlayerState) {
+    PlayerState[PlayerState["isWalking"] = 0] = "isWalking";
+    PlayerState[PlayerState["isShooting"] = 1] = "isShooting";
+})(PlayerState || (PlayerState = {}));
+var Direction;
+(function (Direction) {
+    Direction[Direction["left"] = 0] = "left";
+    Direction[Direction["right"] = 1] = "right";
+    Direction[Direction["up"] = 2] = "up";
+    Direction[Direction["down"] = 3] = "down";
+})(Direction || (Direction = {}));
 
 
 

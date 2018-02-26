@@ -9,13 +9,13 @@
     
     <body>
         <header>
-		    <h1>Dragon Hunt</h1>
-		    <h2>Игра про охоту на дракона</h2>
 	    </header>
 
         <div id="menu" class="menu">
-            <div class="button"><button id="gameButton" type="button">Игра</button></div>
-            <div class="button"><button id="settingsButton" type="button">Настройки</button></div>
+            <div class="button">
+                <button id="gameButton" type="button">Игра</button>
+                <button id="settingsButton" type="button">Настройки</button>
+            </div>
         </div>
         <div id="game" class="game">
             <div class="field">
@@ -226,14 +226,16 @@
                     <div class = "unvisited_cap" id="c98"></div>
                     <div class = "unvisited_cap" id="c99"></div>
                 </div>
-            </div>    
-            
+            </div>
             <div class="button"><button id="exitButton" type="button">Меню</button></div>
+            <div class="text">Управляйте охотником с помощью клавиш WASD. Чтобы перейти в режим стрельбы, нажмите пробел и выберите направление клавишами WASD. 
+                Нажмите Enter, чтобы выстрелить, или пробел, чтобы выйти из режима стрельбы.</div>
         </div>
         <div id="settings" class="settings">
-            <input type="number" pattern="\d [1-9]" min="1" max="9" id="holesNumberInput"></input>
-            <input type="submit" class="button" id="confirmButton"></input>
-            <div class="button"><button id="cancelButton" type="button">Отмена</button></div>
+            <div class="text">Введите число ям от 1 до 9:</div>
+            <div class="button"><input type="number" class="inputNumber" pattern="\d [1-9]" min="1" max="9" id="holesNumberInput"></input>
+            <input type="submit" class="inputButton" id="confirmButton"></input>
+            <button id="cancelButton" type="button">Отмена</button></div>
         </div>
         <script src="scripts/build/main.js"></script>
     </body>
