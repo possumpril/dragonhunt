@@ -21,7 +21,6 @@ export class Cell
     {
         this.content=Content.none;
         this.visited=false;
-//        this.divLink = new HTMLElement();
     }
 
     public cleanCell()

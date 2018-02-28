@@ -1,12 +1,11 @@
+/**Модуль инициализации игры */
 
-
-//import {Game,GameOver,Cell,Content} from "./game";
-
+/**Импорт модуля игрока */
 import {Player, Direction, PlayerState} from "./player";
-import * as $ from 'jquery';
 
 let player: Player;
 
+/**Функция для отображения блока с игрой */
 function showGame()
 {
     let a = document.getElementById("game");
@@ -16,6 +15,7 @@ function showGame()
     player.initGame();
 }
 
+/**Функция для кнопки "Играть" */
 function gameStartButtonClick()
 {
     let gameButton = document.getElementById("gameButton");
@@ -25,6 +25,7 @@ function gameStartButtonClick()
     }
 }
 
+/**Функция для отображения блока с настройками */
 function showSettings()
 {
     let a = document.getElementById("settings");
@@ -33,12 +34,14 @@ function showSettings()
     if (b!=null) b.style.display="none";
 }
 
+/**Функция для кнопки "Настройки" */
 function settingsButtonClick()
 {
     let settingsButton = document.getElementById("settingsButton");
     if (settingsButton!=null) settingsButton.addEventListener("click", showSettings);
 }
 
+/**Функция для отображения блока меню */
 function showMenu()
 {
     let a = document.getElementById("settings");
@@ -49,24 +52,28 @@ function showMenu()
     if (c!=null) c.style.display="block";
 }
 
+/**Функция для кнопки "Отмена" в блоке настроек */
 function cancelButtonClick()
 {
     let cancelButton = document.getElementById("cancelButton");
     if (cancelButton!=null) cancelButton.addEventListener("click", showMenu);
 }
 
+/**Функция для кнопки "Меню" в блоке игры*/
 function exitButtonClick()
 {
     let exitButton = document.getElementById("exitButton");
     if (exitButton!=null) exitButton.addEventListener("click", exitGame);
 }
 
+/**Функция для завершения игры и выхода в меню */
 function exitGame()
 {
     player.game.gameState = false;
     showMenu();
 }
 
+/**Функция для кнопки "Применить" в блоке настроек */
 function confirmButtonClick()
 {
     let confirmButton = document.getElementById("confirmButton");
@@ -76,6 +83,7 @@ function confirmButtonClick()
     } 
 }
 
+/**Функция, меняющая число ям в настройках */
 function confirmChanges()
 {
     let holesNumberInput = document.getElementById("holesNumberInput");
@@ -96,6 +104,7 @@ function confirmChanges()
     
 }
 
+/**Функция для обработки нажатий клавиш в игре */
 function presskey(event: KeyboardEvent)
 {
     if (player.game.gameState === true)

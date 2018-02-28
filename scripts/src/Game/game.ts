@@ -1,13 +1,18 @@
-/**Модуль класса игры */
+/**Модуль класса игры 
+ * 
+ * @module
+*/
 
 /**Импорт класса клеток */
 import {Cell, Content} from "./cell";
+
+/**Импорт библиотеки jQuery */
 import * as $ from 'jquery';
 
 /**Класс игры */
 export class Game
 {
-    /**Длина стороны поля */
+    /**Константа длины стороны поля */
     public static readonly SIDE_LENGTH = 10;
 
     /**Дефолтное количество ям */
@@ -16,13 +21,13 @@ export class Game
     /**Идет игра или нет */
     public gameState: boolean;
 
-    /**Длина стороны поля*/
+    /**Текущая длина стороны поля*/
     private _sideLength: number;
 
     /**Массив клеток поля */
     private _cellsArray: Cell[];
 
-    /**Количество ям на поле */
+    /**Текущее количество ям на поле */
     private _holesNumber: number;
 
     /**Статус конца игры */
@@ -84,7 +89,9 @@ export class Game
         return dragon;
     }
 
-    /**Выбор координат для ям: любые, кроме стартовой клетки игрока и клетки с драконом */
+    /**Выбор координат для ям: любые, кроме стартовой клетки игрока и клетки с драконом 
+     * @param number координата дракона
+    */
     private _chooseHolesPlaces(dragon:number)
     {
         let holesArray: number[] = [];
@@ -109,7 +116,9 @@ export class Game
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    /**Размещение дракона и ям согласно выбранным координатам */
+    /**Размещение дракона и ям согласно выбранным координатам 
+     * @param number[] массив с координатами
+    */
     private _placeDangers(dangerArray: number[])
     {
         this._cellsArray[dangerArray[0]].content=Content.dragon;
@@ -119,7 +128,9 @@ export class Game
         }
     }
 
-    /**Размещение предупреждений о расставленных драконе и ямах */
+    /**Размещение предупреждений о расставленных драконе и ямах
+     * @param number[] массив с координатами
+     */
     private _placeWarnings(dangerArray: number[])
     {
         this._placeWarningsAroundDragon(dangerArray[0]);
@@ -129,7 +140,9 @@ export class Game
         }
     }
 
-    /**Размещение предупреждений вокруг дракона */
+    /**Размещение предупреждений вокруг дракона 
+     * @param number координата дракона
+    */
     private _placeWarningsAroundDragon(dragonPlace: number)
     {
         let left = this.getLeftNeighbour(dragonPlace);
@@ -154,7 +167,9 @@ export class Game
         }
     }
 
-    /**Размещение предупреждений вокруг ямы */
+    /**Размещение предупреждений вокруг ямы 
+     * @param number координата ямы
+    */
     private _placeWarningsAroundHole(holePlace: number)
     {
         let left = this.getLeftNeighbour(holePlace);
@@ -205,25 +220,33 @@ export class Game
 
     /**Блок функций для получения соседних клеток */
 
-    /**Возвращает индекс соседа снизу */
+    /**Возвращает индекс соседа снизу 
+     * @param number координата текущей клетки
+    */
     public getLowerNeighbour(i:number)
     {
         return (i+this._sideLength)%(this._sideLength*this._sideLength);
     }
 
-    /**Возвращает индекс соседа сверху */   
+    /**Возвращает индекс соседа сверху 
+     * @param number координата текущей клетки
+     * */   
     public getUpperNeighbour(i:number)
     {
         return (i+this._sideLength*(this._sideLength-1))%(this._sideLength*this._sideLength);
     }
 
-    /**Возвращает индекс соседа слева */
+    /**Возвращает индекс соседа слева 
+     * @param number координата текущей клетки
+    */
     public getLeftNeighbour(i:number)
     {
         return (Math.floor(i/this._sideLength))*this._sideLength + (this._sideLength-1) - (this._sideLength-i%this._sideLength)%this._sideLength;
     }
 
-    /**Возвращает индекс соседа справа */
+    /**Возвращает индекс соседа справа 
+     * @param number координата текущей клетки
+    */
     public getRightNeighbour(i:number)
     {
         return (Math.floor(i/this._sideLength))*this._sideLength + (i%this._sideLength+1)%this._sideLength;
@@ -252,6 +275,10 @@ export class Game
 
     /**Блок функций для хода игры */
 
+    /**Возвращает истину, если игра не закончилась при ходе, и ложь, если закончилась, и вызывает функции для конца игры
+     * @param Action какое действие было совершено при ходе
+     * @param number куда игрок походил или выстрелил
+     */
     public tryToGoOrShoot(action: Action, index: number)
     {
         let indexContent = this._cellsArray[index].content;
@@ -281,6 +308,10 @@ export class Game
         }
     }
 
+    /**Определяет, какой конец игры произошел
+     * @param Action какое действие было совершено при ходе
+     * @param Content что находится в клетке, куда игрок походил или выстрелил
+     */
     private _identifyGameOver(action: Action, content: Content)
     {
         if (action === Action.walking && content === Content.dragon)
@@ -291,10 +322,11 @@ export class Game
             this._gameOver = GameOver.killingDragon;
         if (action === Action.shooting && content != Content.dragon)
             this._gameOver = GameOver.burningByDragon;
-        this._();
+        this._finishGame();
     }
 
-    private _()
+    /**Заканчивает игру визуально: открывает поле и выводит сообщение о конце игры */
+    private _finishGame()
     {
         for (let i=0;i<=(this._sideLength*this._sideLength)-1;i++)
         {
@@ -317,18 +349,30 @@ export class Game
         }
     }
 
+    /**Открывает игровую клетку
+     * @param number индекс клетки
+     */
     private _openCap(index: number)
     {
         let cap = $("#c"+index);
         cap.attr('class', 'visited_cap');
     }
 
+    /**Закрывает игровую клетку
+     * @param number индекс клетки
+     */
     private _closeCap(index: number)
     {
         let cap = $("#c"+index);
         cap.attr('class', 'unvisited_cap');
     }
 }
+
+/**Варианты конца игры */
 export enum GameOver {isNotOver, fallIntoHole, burningByDragon, killingDragon};
-export {Cell,Content} from "./cell";
+
+/**Варианты действий игрока при ходе */
 export enum Action {walking, shooting};
+
+/**Реэкспорт модуля клетки */
+export {Cell,Content} from "./cell";

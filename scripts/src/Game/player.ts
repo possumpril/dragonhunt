@@ -3,16 +3,28 @@
 /**Импорт класса игры */
 import {Game, GameOver, Content, Action} from "./game";
 
+/**Импорт библиотеки jQuery */
 import * as $ from 'jquery';
 
 /**Класс игрока */
 export class Player 
 {
+    /**Ссылка на div c игроком на странице */
     private divLink: JQuery<HTMLElement>;
+
+    /**Индекс клетки, где сейчас находится игрок */
     private location: number;
+
+    /**Состояние игрока: ходит или стреляет */
     public playerState: PlayerState;
+
+    /**Объект класса игра */
     public game: Game;
+
+    /**Направление стрельбы, которое выбрано игроком */
     private shootingDirection: Direction;
+
+    /**Конструктор */
     public constructor()
     {
         this.game = new Game();
@@ -23,6 +35,7 @@ export class Player
         this.shootingDirection = Direction.up;
     }
 
+    /**Функция инициализации игры при нажатии на кнопку "Играть" */
     public initGame()
     {
         this.game.gameStart();
@@ -34,6 +47,7 @@ export class Player
         this.unHidePlayer();
     }
 
+    /**Функция смены состояния игрока: если ходил, меняет на стрельбу, и наоборот */
     public changePlayerState ()
     {
         if (this.playerState === PlayerState.isWalking)
@@ -49,6 +63,9 @@ export class Player
         }
     }
 
+    /**Функция смены направления стрельбы
+     * @param Direction выбранное направление
+     */
     public changeShootingDirection(dir: Direction)
     {
         this.shootingDirection = dir;
@@ -72,16 +89,21 @@ export class Player
         }
     }
 
+    /**Функция, которая прячет игрока на странице */
     private hidePlayer ()
     {
         this.divLink.css('display', 'none');
     }
 
+    /**Функция, которая показывает игрока на странице */
     private unHidePlayer()
     {
         this.divLink.css('display', 'block');
     }
 
+    /**Функция хода
+     * @param Direction направление хода
+     */
     public go(directionOfGoing: Direction)
     {
         let neighborIndex = this.getNeighborIndex(directionOfGoing);
@@ -95,6 +117,7 @@ export class Player
         }
     }
 
+    /**Функция стрельбы */
     public shoot()
     {
         let neighborIndex = this.getNeighborIndex(this.shootingDirection);
@@ -106,12 +129,18 @@ export class Player
         }
     }
 
+    /**Функция, которая перемещает игрока в другую клетку
+     * @param number индекс клетки, в которую перемещается игрок
+     */
     private movePlayer(index: number)
     {
         this.location = index;
         this.divLink.css('grid-area', '' + (Math.floor(index/10)+1) + '/' + (index%10+1));
     }
 
+    /**Функция, которая возвращает индекс соседней клетки
+     * @param Direction направление, в котором требуется найти соседа
+     */
     private getNeighborIndex(directionOfGoing: Direction)
     {
         switch (directionOfGoing)
@@ -132,7 +161,11 @@ export class Player
 
 }
 
+/**Варианты состояния игрока */
 export enum PlayerState {isWalking, isShooting}
+
+/**Варианты направления */
 export enum Direction {left, right, up, down}
 
+/**Реэкспорт модуля игры */
 export{Game} from "./game";
