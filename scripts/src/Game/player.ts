@@ -3,14 +3,11 @@
 /**Импорт класса игры */
 import {Game, GameOver, Content, Action} from "./game";
 
-/**Импорт библиотеки jQuery */
-import * as $ from 'jquery';
-
 /**Класс игрока */
 export class Player 
 {
     /**Ссылка на div c игроком на странице */
-    private divLink: JQuery<HTMLElement>;
+    private divLink: HTMLElement;
 
     /**Индекс клетки, где сейчас находится игрок */
     private location: number;
@@ -29,8 +26,8 @@ export class Player
     {
         this.game = new Game();
         this.playerState = PlayerState.isWalking;
-        this.divLink = $("#player");
-        this.divLink.css('grid-area', '10/1');
+        this.divLink = document.getElementById('player')!;
+        (this.divLink.style as any).gridArea = '10/1';
         this.location = 90;
         this.shootingDirection = Direction.up;
     }
@@ -40,10 +37,10 @@ export class Player
     {
         this.game.gameStart();
         this.playerState = PlayerState.isWalking;
-        this.divLink.attr('class', 'walking');
-        this.divLink.css('transform', 'rotate(0deg)');
+        this.divLink.className = "walking";
+        this.divLink.style.transform = 'rotate(0deg)';
         this.location = 90;
-        this.divLink.css('grid-area', '10/1');
+        (this.divLink.style as any).gridArea = '10/1';
         this.unHidePlayer();
     }
 
@@ -53,13 +50,13 @@ export class Player
         if (this.playerState === PlayerState.isWalking)
         {
             this.playerState = PlayerState.isShooting;
-            this.divLink.attr('class', 'shooting');
+            this.divLink.className = "shooting";
         }
         else 
         {
             this.playerState = PlayerState.isWalking;
-            this.divLink.attr('class', 'walking');
-            this.divLink.css('transform', 'rotate(0deg)');
+            this.divLink.className = "walking";
+            this.divLink.style.transform = 'rotate(0deg)';
         }
     }
 
@@ -72,16 +69,16 @@ export class Player
         switch (dir)
         {
             case Direction.up:
-                this.divLink.css('transform', 'rotate(0deg)');
+                this.divLink.style.transform = 'rotate(0deg)';
                 break;
             case Direction.down:
-                this.divLink.css('transform', 'rotate(180deg)');
+                this.divLink.style.transform = 'rotate(180deg)';
                 break;
             case Direction.left:
-                this.divLink.css('transform', 'rotate(-90deg)');
+                this.divLink.style.transform = 'rotate(-90deg)';
                 break;
             case Direction.right:
-                this.divLink.css('transform', 'rotate(90deg)');
+                this.divLink.style.transform = 'rotate(90deg)';
                 break;
             default:
                 alert('Получено неверное направление!');
@@ -92,13 +89,13 @@ export class Player
     /**Функция, которая прячет игрока на странице */
     private hidePlayer ()
     {
-        this.divLink.css('display', 'none');
+        this.divLink.style.display = "none";
     }
 
     /**Функция, которая показывает игрока на странице */
     private unHidePlayer()
     {
-        this.divLink.css('display', 'block');
+        this.divLink.style.display = "block";
     }
 
     /**Функция хода
@@ -135,7 +132,7 @@ export class Player
     private movePlayer(index: number)
     {
         this.location = index;
-        this.divLink.css('grid-area', '' + (Math.floor(index/10)+1) + '/' + (index%10+1));
+        (this.divLink.style as any).gridArea = '' + (Math.floor(index/10)+1) + '/' + (index%10+1);
     }
 
     /**Функция, которая возвращает индекс соседней клетки

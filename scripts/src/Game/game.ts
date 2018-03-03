@@ -6,9 +6,6 @@
 /**Импорт класса клеток */
 import {Cell, Content} from "./cell";
 
-/**Импорт библиотеки jQuery */
-import * as $ from 'jquery';
-
 /**Класс игры */
 export class Game
 {
@@ -354,8 +351,8 @@ export class Game
      */
     private _openCap(index: number)
     {
-        let cap = $("#c"+index);
-        cap.attr('class', 'visited_cap');
+        let cap = document.getElementById('c'+index)!;
+        cap.className = "visited_cap";
     }
 
     /**Закрывает игровую клетку
@@ -363,8 +360,8 @@ export class Game
      */
     private _closeCap(index: number)
     {
-        let cap = $("#c"+index);
-        cap.attr('class', 'unvisited_cap');
+        let cap = document.getElementById('c'+index)!;
+        cap.className = "unvisited_cap";
     }
 }
 
