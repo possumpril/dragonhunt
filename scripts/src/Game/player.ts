@@ -26,6 +26,7 @@ export class Player
     {
         this.game = new Game();
         this.playerState = PlayerState.isWalking;
+        this.shootingDirection = Direction.up;
         this.divLink = document.getElementById('player')!;
         (this.divLink.style as any).gridArea = '10/1';
         this.location = 90;
@@ -37,6 +38,7 @@ export class Player
     {
         this.game.gameStart();
         this.playerState = PlayerState.isWalking;
+        this.shootingDirection = Direction.up;
         this.divLink.className = "walking";
         this.divLink.style.transform = 'rotate(0deg)';
         this.location = 90;
